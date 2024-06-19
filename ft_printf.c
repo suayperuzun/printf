@@ -6,14 +6,12 @@
 /*   By: seruzun <suayp.eruzun@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 10:58:58 by seruzun           #+#    #+#             */
-/*   Updated: 2024/05/18 16:05:44 by seruzun          ###   ########.fr       */
+/*   Updated: 2024/06/19 13:25:51 by seruzun          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./libft/libft.h"
 #include "ft_printf.h"
-#include <stdbool.h>
-#include <unistd.h>
 
 int	ft_putlstr_fd(char *s, int fd)
 {
@@ -37,13 +35,13 @@ int	ft_putptr(void *ptr)
 		return (write(1, "(nil)", 5));
 	val = (uintptr_t)ptr;
 	ft_putstr_fd("0x", 1);
-	i = 1;
+	i = 0;
 	while (i < 16)
 	{
 		digit = (val >> (60 - 4 * i)) & 0xF;
-		if (digit != 0)
+		if (digit != 0 || i == 15)
 			leading = false;
-		if (!leading || i == 0)
+		if (!leading || i == 15)
 			count += ft_putnbr_base(digit, "0123456789abcdef");
 		i++;
 	}
@@ -125,67 +123,35 @@ int	ft_printf(const char *str, ...)
 	return (count);
 }
 
-// int ft_printf(const char *str, ...)
-// {
-//     va_list args;
-//     int count = 0;
-//     int formatted_output_length;
-//     bool errorflag = false;
-
-//     if (str == NULL)
-//         return (-1);
-
-//     va_start(args, str);
-
-//     while (*str != '\0')
-//     {
-//         if (*str == '%')
-//         {
-//             str++;
-//             if (*str == '\0') {  // Check if the '%' is the last character
-//                 errorflag = true;
-//                 break ;
-//             }
-//             formatted_output_length = ft_print_format(*str, args);
-//             if (formatted_output_length == -1)
-//                 errorflag = true;
-//             else
-//                 count += formatted_output_length;
-//         }
-//         else
-//         {
-//             if (write(1, str, 1) == -1) {
-//                 errorflag = true;
-//                 break ;
-//             }
-//             count++;
-//         }
-//         str++;
-//     }
-
-//     va_end(args);
-
-//     if (errorflag)
-//         return (-1);
-
-//     return (count);
-// }
-
 // #include <stdio.h>
+// #include <limits.h>
 
 // int	main(void)
 // {
 // 	int count;
-// 	char c = -2147483840;
-// 	//char c = 50;
-// 	char *s = NULL;
-// 	char *p = &c;
-// 	int d = -2147483648;
-// 	int i = 012;
-// 	int u = 99;
-// 	int x = 160;
-// 	int X = 16702650;
+// 	// //char c = +21880;
+// 	// char c = 50;
+// 	// char *s = NULL;
+// 	// char *p = &c;
+// 	// int d = -2147483648;
+// 	// int i = 012;
+// 	// int u = 99;
+// 	// int x = 160;
+// 	// int X = 16702650;
 
+// 	///ERRORRSSS
+// 	//printf(" %p %p ", LONG_MIN, LONG_MAX);
+
+// 	//printf(" %p %p ", ULONG_MAX, -ULONG_MAX);
+
+// 	count = ft_printf(" %p \n %p \n", LONG_MIN, LONG_MAX);
+// 	ft_printf("Output ft_printf: %d\n", count);
+
+// 	count = ft_printf(" %p \n %p \n", ULONG_MAX, -ULONG_MAX);
+// 	ft_printf("Output ft_printf: %d\n", count);
+
+// 	//////////////////////////////
+// /*
 // 	count = ft_printf("Here is 21 characters\n");
 // 	ft_printf("Output ft_printf: %d\n", count);
 
@@ -247,6 +213,8 @@ int	ft_printf(const char *str, ...)
 
 // 	count = printf("%%\n");
 // 	printf("Output printf: %d\n", count);
+
+//  */
 
 // 	return (0);
 // }

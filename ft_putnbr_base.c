@@ -6,7 +6,7 @@
 /*   By: seruzun <suayp.eruzun@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 16:45:58 by seruzun           #+#    #+#             */
-/*   Updated: 2024/05/18 12:11:52 by seruzun          ###   ########.fr       */
+/*   Updated: 2024/06/17 10:17:54 by seruzun          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,18 +103,18 @@ int	ft_putnbr_base(int nbr, char *base)
 #include <stdio.h>
 #include <stdlib.h>
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-    if (argc != 3) {
-        printf("Usage: %s <number>\n", argv[0]);
-        return 1;
-    }
+	char	*base;
+	int		i;
 
-	char *base = argv[2];
-    int i = atoi(argv[1]);
-
-    ft_putnbr_base(i, base);
-
-    return 0;
+	if (argc != 3) {
+		printf("Usage: %s <number>\n", argv[0]);
+		return (1);
+	}
+	base = argv[2];
+	i = atoi(argv[1]);
+	ft_putnbr_base(i, base);
+	return (0);
 }
 */
